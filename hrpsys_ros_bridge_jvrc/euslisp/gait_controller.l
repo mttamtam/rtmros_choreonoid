@@ -377,25 +377,29 @@
      ;; RYOBI HOIST
      ;; (send *ri* :angle-vector touch-down-pose 5000)
      ;; IREX HOIST
-     (send *ri* :angle-vector touch-down-pose 6000)
+     (send *ri* :angle-vector touch-down-pose 2000)
      (speak-en "u go e te ru" :timeout 1)
-     (send *ri* :wait-interpolation))
-   (progn
+     (send *ri* :wait-interpolation)
+     ;;(send *ri* :set-auto-balancer-param :is-hand-fix-mode (list :rarm :larm))
+     )
+   #|(progn
      (speak-en "es te ei b c to me te ru" :timeout 1)
-     (send *ri* :stop-default-unstable-controllers))
+     (send *ri* :stop-default-unstable-controllers))|#
    (progn
      (send *ri* :angle-vector quadruped-pose 3000)
      (speak-en "u go e te ru" :timeout 1)
      (send *ri* :wait-interpolation))
    (progn                               ;set parameters
+     ;; (send *ri* :set-auto-balancer-param :transition-time 10.0)
      (send* *ri* :set-auto-balancer-param (cadr (memq :auto-balancer-param quadruped-params)))
      (send* *ri* :set-gait-generator-param (cadr (memq :gait-generator-param quadruped-params)))
      (send* *ri* :set-st-param (cadr (memq :st-param quadruped-params))))
-   (progn
-     (speak-en "ei b c e re te e ru" :timeout 1)
+
+   #|(progn
+     ;; (speak-en "ei b c e re te e ru" :timeout 1)
      (send *ri* :start-auto-balancer :limbs '(:rleg :lleg :rarm :larm))
-     (speak-en "es te e re te e ru" :timeout 1)
-     (send *ri* :start-st))
+     ;; (speak-en "es te e re te e ru" :timeout 1)
+     (send *ri* :start-st))|#
    (setq current-gait-type 'quadruped)
    )
   (:quadruped->biped
@@ -424,7 +428,7 @@
      ;; RYOBI HOIST
      ;; (send *ri* :angle-vector biped-pose 2000)
      ;; IREX HOIST
-     (send *ri* :angle-vector biped-pose 6000)
+     (send *ri* :angle-vector biped-pose 2000)
      (speak-en "u go e te ru" :timeout 1)
      (send *ri* :wait-interpolation))
    (send *ri* :set-st-param :emergency-check-mode 2)
