@@ -380,6 +380,7 @@
      (send *ri* :angle-vector touch-down-pose 2000)
      (speak-en "u go e te ru" :timeout 1)
      (send *ri* :wait-interpolation)
+     (send *ri* :stop-st)
      ;;(send *ri* :set-auto-balancer-param :is-hand-fix-mode (list :rarm :larm))
      )
    #|(progn
@@ -393,7 +394,9 @@
      ;; (send *ri* :set-auto-balancer-param :transition-time 10.0)
      (send* *ri* :set-auto-balancer-param (cadr (memq :auto-balancer-param quadruped-params)))
      (send* *ri* :set-gait-generator-param (cadr (memq :gait-generator-param quadruped-params)))
-     (send* *ri* :set-st-param (cadr (memq :st-param quadruped-params))))
+     (send* *ri* :set-st-param (cadr (memq :st-param quadruped-params)))
+     (send *ri* :start-st)
+     )
 
    #|(progn
      ;; (speak-en "ei b c e re te e ru" :timeout 1)
