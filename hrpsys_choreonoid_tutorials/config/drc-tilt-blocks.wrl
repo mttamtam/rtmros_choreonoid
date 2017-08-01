@@ -1,0 +1,597 @@
+#VRML V2.0 utf8
+
+# Produced by EusLisp 9.19(88f1d01 1.0.12 75b92b4) for Linux64 created on tamura-desktop(Thu May 19 23:18:02 JST 2016)
+# Date: Thu Jun 30 17:32:29 2016
+
+
+PROTO Joint [
+ exposedField     SFVec3f      center              0 0 0
+ exposedField     MFNode       children            []
+ exposedField     MFFloat      llimit              []
+ exposedField     SFRotation   limitOrientation    0 0 1 0
+ exposedField     SFString     name                ""
+ exposedField     SFRotation   rotation            0 0 1 0
+ exposedField     SFVec3f      scale               1 1 1
+ exposedField     SFRotation   scaleOrientation    0 0 1 0
+ exposedField     MFFloat      stiffness           [ 0 0 0 ]
+ exposedField     SFVec3f      translation         0 0 0
+ exposedField     MFFloat      ulimit              []
+ exposedField     MFFloat      dh                  [0 0 0 0]
+ exposedField     SFString     jointType           ""
+ exposedField     SFInt32      jointId             -1
+ exposedField     SFVec3f     jointAxis           0 0 1
+]
+{
+   Transform {
+      center           IS center
+      children         IS children
+      rotation         IS rotation
+      scale            IS scale
+      scaleOrientation IS scaleOrientation
+      translation      IS translation
+   }
+}
+
+PROTO Segment [
+ field           SFVec3f     bboxCenter        0 0 0
+ field           SFVec3f     bboxSize          -1 -1 -1
+ exposedField    SFVec3f     centerOfMass      0 0 0
+ exposedField    MFNode      children          [ ]
+ exposedField    SFNode      coord             NULL
+ exposedField    MFNode      displacers        [ ]
+ exposedField    SFFloat     mass              0
+ exposedField    MFFloat     momentsOfInertia  [ 0 0 0 0 0 0 0 0 0 ]
+ exposedField    SFString    name              ""
+ eventIn         MFNode      addChildren
+ eventIn         MFNode      removeChildren
+]
+{
+   Group {
+      addChildren    IS addChildren
+      bboxCenter     IS bboxCenter
+      bboxSize       IS bboxSize
+      children       IS children
+      removeChildren IS removeChildren
+   }
+}
+
+
+PROTO Humanoid [
+ field           SFVec3f    bboxCenter            0 0 0
+ field           SFVec3f    bboxSize              -1 -1 -1
+ exposedField    SFVec3f    center                0 0 0
+ exposedField    MFNode     humanoidBody          [ ]
+ exposedField    MFString   info                  [ ]
+ exposedField    MFNode     joints                [ ]
+ exposedField    SFString   name                  ""
+ exposedField    SFRotation rotation              0 0 1 0
+ exposedField    SFVec3f    scale                 1 1 1
+ exposedField    SFRotation scaleOrientation      0 0 1 0
+ exposedField    MFNode     segments              [ ]
+ exposedField    MFNode     sites                 [ ]
+ exposedField    SFVec3f    translation           0 0 0
+ exposedField    SFString   version               "1.1"
+ exposedField    MFNode     viewpoints            [ ]
+]
+{
+   Transform {
+      bboxCenter       IS bboxCenter
+      bboxSize         IS bboxSize
+      center           IS center
+      rotation         IS rotation
+      scale            IS scale
+      scaleOrientation IS scaleOrientation
+      translation      IS translation
+      children [
+         Group {
+            children IS viewpoints
+         }
+         Group {
+            children IS humanoidBody
+         }
+      ]
+   }
+}
+
+
+PROTO VisionSensor [
+  exposedField SFVec3f    translation       0 0 0
+  exposedField SFRotation rotation              0 0 1 0
+  #exposedField SFRotation orientation       0 0 1 0
+  exposedField SFFloat    fieldOfView       0.785398
+  exposedField SFString   name              ""
+  exposedField SFFloat    frontClipDistance 0.01
+  exposedField SFFloat    backClipDistance  10.0
+  exposedField SFString   type              "NONE"
+  exposedField SFInt32    sensorId          -1
+  exposedField SFInt32    width             320  # 
+  exposedField SFInt32    height            240  # 
+  #exposedField MFNode       children            [] # for me
+]
+{
+  Transform {
+    rotation         IS rotation
+    translation      IS translation
+    #children IS children # for me
+  }
+}
+
+
+PROTO ForceSensor [
+  exposedField SFVec3f maxForce -1 -1 -1
+  exposedField SFVec3f maxTorque -1 -1 -1
+  exposedField SFVec3f translation 0 0 0
+  exposedField SFRotation rotation 0 0 1 0
+  exposedField SFInt32 sensorId -1
+]
+{
+  Transform {
+translation IS translation
+    rotation IS rotation
+  }
+}
+
+PROTO Gyro [
+  exposedField SFVec3f maxAngularVelocity -1 -1 -1
+  exposedField SFVec3f translation 0 0 0
+  exposedField SFRotation rotation 0 0 1 0
+  exposedField SFInt32 sensorId -1
+]
+{
+  Transform {
+    translation IS translation
+    rotation IS rotation
+  }
+}
+
+PROTO AccelerationSensor [
+  exposedField SFVec3f maxAcceleration -1 -1 -1
+  exposedField SFVec3f translation 0 0 0
+  exposedField SFRotation rotation 0 0 1 0
+  exposedField SFInt32 sensorId -1
+]
+{
+  Transform {
+    translation IS translation
+    rotation IS rotation
+  }
+}
+
+PROTO PressureSensor [
+  exposedField SFFloat maxPressure -1
+  exposedField SFVec3f translation 0 0 0
+  exposedField SFRotation rotation 0 0 1 0
+  exposedField SFInt32 sensorId -1
+]
+{
+  Transform {
+    translation IS translation
+    rotation IS rotation
+  }
+}
+
+
+NavigationInfo {
+avatarSize    0.5
+headlight     TRUE
+type  ["EXAMINE", "ANY"]
+}
+Viewpoint {
+position    3 0 0.835
+orientation 0.5770 0.5775 0.5775 2.0935
+}
+DEF drc-tilt-blocks Humanoid {
+humanoidBody [
+DEF WAIST Joint {
+  jointType "fixed"
+  dh [0 0 0 0]
+  translation 0.000000 0.000000 0.000000
+  rotation 0.0 0.0 1.0 0
+  children [
+DEF ROOT-LINK_S Segment {
+  centerOfMass 0.0 0.0 0.0
+  mass 0.001
+  momentsOfInertia [ 1.000000e-09 0.0 0.0 0.0 1.000000e-09 0.0 0.0 0.0 1.000000e-09 ]
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry DEF ROOT-LINK-FACES IndexedFaceSet {
+        creaseAngle 0.8
+        ccw TRUE
+        solid TRUE
+        colorPerVertex FALSE
+        color Color {
+           color [
+           ]
+        }
+        coord DEF ROOT-LINK-COORD Coordinate {
+          point[
+            0.008333 0.195000 0.112500,
+            0.178333 0.195000 0.112500,
+            0.178333 0.195000 0.027500,
+            0.008333 0.195000 0.027500,
+            0.195000 0.195000 0.140000,
+            0.195000 0.195000 0.000000,
+            -0.195000 0.195000 0.000000,
+            -0.195000 0.195000 0.140000,
+            -0.195000 0.000000 0.140000,
+            0.195000 0.000000 0.140000,
+            0.195000 0.000000 0.000000,
+            -0.195000 0.000000 0.000000,
+            0.008333 0.000000 0.027500,
+            0.178333 0.000000 0.027500,
+            0.178333 0.000000 0.112500,
+            0.008333 0.000000 0.112500,
+            -0.178333 0.195000 0.112500,
+            -0.178333 0.000000 0.112500,
+            -0.008333 0.195000 0.112500,
+            -0.008333 0.000000 0.112500,
+            -0.008333 0.000000 0.027500,
+            -0.178333 0.000000 0.027500,
+            -0.178333 0.195000 0.027500,
+            -0.008333 0.195000 0.027500,
+            0.008333 -0.000000 0.112500,
+            0.178333 0.000000 0.112500,
+            0.178333 0.000000 0.027500,
+            0.008333 -0.000000 0.027500,
+            0.195000 0.000000 0.140000,
+            0.195000 0.000000 0.000000,
+            -0.195000 0.000000 0.000000,
+            -0.195000 0.000000 0.140000,
+            -0.195000 -0.195000 0.140000,
+            0.195000 -0.195000 0.140000,
+            0.195000 -0.195000 0.000000,
+            -0.195000 -0.195000 0.000000,
+            0.008333 -0.195000 0.027500,
+            0.178333 -0.195000 0.027500,
+            0.178333 -0.195000 0.112500,
+            0.008333 -0.195000 0.112500,
+            -0.178333 -0.000000 0.112500,
+            -0.178333 -0.195000 0.112500,
+            -0.008333 0.000000 0.112500,
+            -0.008333 -0.195000 0.112500,
+            -0.008333 -0.195000 0.027500,
+            -0.178333 -0.195000 0.027500,
+            -0.178333 -0.000000 0.027500,
+            -0.008333 0.000000 0.027500,
+          ]
+        }
+        coordIndex [
+          13, 2, 3, -1,
+          3, 12, 13, -1,
+          1, 2, 13, -1,
+          13, 14, 1, -1,
+          0, 1, 14, -1,
+          14, 15, 0, -1,
+          15, 12, 3, -1,
+          3, 0, 15, -1,
+          5, 6, 7, -1,
+          7, 4, 5, -1,
+          11, 6, 5, -1,
+          5, 10, 11, -1,
+          9, 4, 7, -1,
+          7, 8, 9, -1,
+          9, 10, 5, -1,
+          5, 4, 9, -1,
+          11, 8, 7, -1,
+          7, 6, 11, -1,
+          8, 11, 10, -1,
+          10, 9, 8, -1,
+          21, 22, 16, -1,
+          16, 17, 21, -1,
+          18, 19, 17, -1,
+          17, 16, 18, -1,
+          23, 20, 19, -1,
+          19, 18, 23, -1,
+          20, 23, 22, -1,
+          22, 21, 20, -1,
+          37, 26, 27, -1,
+          27, 36, 37, -1,
+          25, 26, 37, -1,
+          37, 38, 25, -1,
+          24, 25, 38, -1,
+          38, 39, 24, -1,
+          39, 36, 27, -1,
+          27, 24, 39, -1,
+          29, 30, 31, -1,
+          31, 28, 29, -1,
+          35, 30, 29, -1,
+          29, 34, 35, -1,
+          33, 28, 31, -1,
+          31, 32, 33, -1,
+          33, 34, 29, -1,
+          29, 28, 33, -1,
+          35, 32, 31, -1,
+          31, 30, 35, -1,
+          32, 35, 34, -1,
+          34, 33, 32, -1,
+          45, 46, 40, -1,
+          40, 41, 45, -1,
+          42, 43, 41, -1,
+          41, 40, 42, -1,
+          47, 44, 43, -1,
+          43, 42, 47, -1,
+          44, 47, 46, -1,
+          46, 45, 44, -1,
+        ]
+        colorIndex [
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        ]
+      }
+    }
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry DEF ROOT-LINK-FACES IndexedFaceSet {
+        creaseAngle 0.8
+        ccw TRUE
+        solid TRUE
+        colorPerVertex FALSE
+        color Color {
+           color [
+           ]
+        }
+        coord DEF ROOT-LINK-COORD Coordinate {
+          point[
+            0.403333 0.185213 0.111670,
+            0.573333 0.185213 0.111670,
+            0.573333 0.163214 0.029566,
+            0.403333 0.163214 0.029566,
+            0.590000 0.192331 0.138233,
+            0.590000 0.156096 0.003003,
+            0.200000 0.156096 0.003003,
+            0.200000 0.192331 0.138233,
+            0.200000 0.003975 0.188702,
+            0.590000 0.003975 0.188702,
+            0.590000 -0.032259 0.053473,
+            0.200000 -0.032259 0.053473,
+            0.403333 -0.025142 0.080036,
+            0.573333 -0.025142 0.080036,
+            0.573333 -0.003142 0.162139,
+            0.403333 -0.003142 0.162139,
+            0.216667 0.185213 0.111670,
+            0.216667 -0.003142 0.162139,
+            0.386667 0.185213 0.111670,
+            0.386667 -0.003142 0.162139,
+            0.386667 -0.025142 0.080036,
+            0.216667 -0.025142 0.080036,
+            0.216667 0.163214 0.029566,
+            0.386667 0.163214 0.029566,
+            0.403333 -0.003142 0.162139,
+            0.573333 -0.003142 0.162139,
+            0.573333 -0.025142 0.080036,
+            0.403333 -0.025142 0.080036,
+            0.590000 0.003975 0.188702,
+            0.590000 -0.032259 0.053473,
+            0.200000 -0.032259 0.053473,
+            0.200000 0.003975 0.188702,
+            0.200000 -0.184380 0.239172,
+            0.590000 -0.184380 0.239172,
+            0.590000 -0.220615 0.103942,
+            0.200000 -0.220615 0.103942,
+            0.403333 -0.213497 0.130505,
+            0.573333 -0.213497 0.130505,
+            0.573333 -0.191498 0.212609,
+            0.403333 -0.191498 0.212609,
+            0.216667 -0.003142 0.162139,
+            0.216667 -0.191498 0.212609,
+            0.386667 -0.003142 0.162139,
+            0.386667 -0.191498 0.212609,
+            0.386667 -0.213497 0.130505,
+            0.216667 -0.213497 0.130505,
+            0.216667 -0.025142 0.080036,
+            0.386667 -0.025142 0.080036,
+          ]
+        }
+        coordIndex [
+          13, 2, 3, -1,
+          3, 12, 13, -1,
+          1, 2, 13, -1,
+          13, 14, 1, -1,
+          0, 1, 14, -1,
+          14, 15, 0, -1,
+          15, 12, 3, -1,
+          3, 0, 15, -1,
+          5, 6, 7, -1,
+          7, 4, 5, -1,
+          11, 6, 5, -1,
+          5, 10, 11, -1,
+          9, 4, 7, -1,
+          7, 8, 9, -1,
+          9, 10, 5, -1,
+          5, 4, 9, -1,
+          11, 8, 7, -1,
+          7, 6, 11, -1,
+          8, 11, 10, -1,
+          10, 9, 8, -1,
+          21, 22, 16, -1,
+          16, 17, 21, -1,
+          18, 19, 17, -1,
+          17, 16, 18, -1,
+          23, 20, 19, -1,
+          19, 18, 23, -1,
+          20, 23, 22, -1,
+          22, 21, 20, -1,
+          37, 26, 27, -1,
+          27, 36, 37, -1,
+          25, 26, 37, -1,
+          37, 38, 25, -1,
+          24, 25, 38, -1,
+          38, 39, 24, -1,
+          39, 36, 27, -1,
+          27, 24, 39, -1,
+          29, 30, 31, -1,
+          31, 28, 29, -1,
+          35, 30, 29, -1,
+          29, 34, 35, -1,
+          33, 28, 31, -1,
+          31, 32, 33, -1,
+          33, 34, 29, -1,
+          29, 28, 33, -1,
+          35, 32, 31, -1,
+          31, 30, 35, -1,
+          32, 35, 34, -1,
+          34, 33, 32, -1,
+          45, 46, 40, -1,
+          40, 41, 45, -1,
+          42, 43, 41, -1,
+          41, 40, 42, -1,
+          47, 44, 43, -1,
+          43, 42, 47, -1,
+          44, 47, 46, -1,
+          46, 45, 44, -1,
+        ]
+        colorIndex [
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        ]
+      }
+    }
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry DEF ROOT-LINK-FACES IndexedFaceSet {
+        creaseAngle 0.8
+        ccw TRUE
+        solid TRUE
+        colorPerVertex FALSE
+        color Color {
+           color [
+           ]
+        }
+        coord DEF ROOT-LINK-COORD Coordinate {
+          point[
+            0.798333 0.195000 0.112500,
+            0.968333 0.195000 0.112500,
+            0.968333 0.195000 0.027500,
+            0.798333 0.195000 0.027500,
+            0.985000 0.195000 0.140000,
+            0.985000 0.195000 0.000000,
+            0.595000 0.195000 0.000000,
+            0.595000 0.195000 0.140000,
+            0.595000 0.000000 0.140000,
+            0.985000 0.000000 0.140000,
+            0.985000 0.000000 0.000000,
+            0.595000 0.000000 0.000000,
+            0.798333 0.000000 0.027500,
+            0.968333 0.000000 0.027500,
+            0.968333 0.000000 0.112500,
+            0.798333 0.000000 0.112500,
+            0.611667 0.195000 0.112500,
+            0.611667 0.000000 0.112500,
+            0.781667 0.195000 0.112500,
+            0.781667 0.000000 0.112500,
+            0.781667 0.000000 0.027500,
+            0.611667 0.000000 0.027500,
+            0.611667 0.195000 0.027500,
+            0.781667 0.195000 0.027500,
+            0.798333 -0.000000 0.112500,
+            0.968333 0.000000 0.112500,
+            0.968333 0.000000 0.027500,
+            0.798333 -0.000000 0.027500,
+            0.985000 0.000000 0.140000,
+            0.985000 0.000000 0.000000,
+            0.595000 0.000000 0.000000,
+            0.595000 0.000000 0.140000,
+            0.595000 -0.195000 0.140000,
+            0.985000 -0.195000 0.140000,
+            0.985000 -0.195000 0.000000,
+            0.595000 -0.195000 0.000000,
+            0.798333 -0.195000 0.027500,
+            0.968333 -0.195000 0.027500,
+            0.968333 -0.195000 0.112500,
+            0.798333 -0.195000 0.112500,
+            0.611667 -0.000000 0.112500,
+            0.611667 -0.195000 0.112500,
+            0.781667 0.000000 0.112500,
+            0.781667 -0.195000 0.112500,
+            0.781667 -0.195000 0.027500,
+            0.611667 -0.195000 0.027500,
+            0.611667 -0.000000 0.027500,
+            0.781667 0.000000 0.027500,
+          ]
+        }
+        coordIndex [
+          13, 2, 3, -1,
+          3, 12, 13, -1,
+          1, 2, 13, -1,
+          13, 14, 1, -1,
+          0, 1, 14, -1,
+          14, 15, 0, -1,
+          15, 12, 3, -1,
+          3, 0, 15, -1,
+          5, 6, 7, -1,
+          7, 4, 5, -1,
+          11, 6, 5, -1,
+          5, 10, 11, -1,
+          9, 4, 7, -1,
+          7, 8, 9, -1,
+          9, 10, 5, -1,
+          5, 4, 9, -1,
+          11, 8, 7, -1,
+          7, 6, 11, -1,
+          8, 11, 10, -1,
+          10, 9, 8, -1,
+          21, 22, 16, -1,
+          16, 17, 21, -1,
+          18, 19, 17, -1,
+          17, 16, 18, -1,
+          23, 20, 19, -1,
+          19, 18, 23, -1,
+          20, 23, 22, -1,
+          22, 21, 20, -1,
+          37, 26, 27, -1,
+          27, 36, 37, -1,
+          25, 26, 37, -1,
+          37, 38, 25, -1,
+          24, 25, 38, -1,
+          38, 39, 24, -1,
+          39, 36, 27, -1,
+          27, 24, 39, -1,
+          29, 30, 31, -1,
+          31, 28, 29, -1,
+          35, 30, 29, -1,
+          29, 34, 35, -1,
+          33, 28, 31, -1,
+          31, 32, 33, -1,
+          33, 34, 29, -1,
+          29, 28, 33, -1,
+          35, 32, 31, -1,
+          31, 30, 35, -1,
+          32, 35, 34, -1,
+          34, 33, 32, -1,
+          45, 46, 40, -1,
+          40, 41, 45, -1,
+          42, 43, 41, -1,
+          41, 40, 42, -1,
+          47, 44, 43, -1,
+          43, 42, 47, -1,
+          44, 47, 46, -1,
+          46, 45, 44, -1,
+        ]
+        colorIndex [
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        ]
+      }
+    }
+  ]
+} #Segment
+]
+} #WAIST
+] # END of HumanoidBody
+
+joints [
+  USE WAIST
+]
+
+segments [
+  USE ROOT-LINK_S
+]
+
+}
