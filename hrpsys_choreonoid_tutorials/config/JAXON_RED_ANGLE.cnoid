@@ -87,6 +87,29 @@ items:
             isEditable: true
         - 
           id: 5
+          name: "box"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "/home/tamura/ros/indigo_parent/src/openhrp3/sample/model/box.wrl"
+            currentBaseLink: "WAIST"
+            rootPosition: [ 0, 0.18, -0.1014 ]
+            rootAttitude: [ 
+              4.32978028e-17, -1, 4.32978028e-17, 
+              0.707106781, 6.123234e-17, 0.707106781, 
+              -0.707106781, 0, 0.707106781 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 0.18, -0.1014 ]
+            initialRootAttitude: [ 
+              1.54541047e-10, -1, 0, 
+              0.707106781, 1.54541047e-10, 0.707106781, 
+              -0.707106781, 0, 0.707106781 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: false
+        - 
+          id: 6
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -117,7 +140,7 @@ items:
             oldAccelSensorMode: false
           children: 
             - 
-              id: 6
+              id: 7
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
@@ -136,7 +159,7 @@ items:
                 enableHeadLight: true
                 enableAdditionalLights: true
             - 
-              id: 7
+              id: 8
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
@@ -155,7 +178,7 @@ items:
                 enableHeadLight: true
                 enableAdditionalLights: true
             - 
-              id: 8
+              id: 9
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
@@ -174,7 +197,7 @@ items:
                 enableHeadLight: true
                 enableAdditionalLights: true
     - 
-      id: 9
+      id: 10
       name: "ros_service_server.py"
       plugin: Python
       class: PythonScriptItem
@@ -182,29 +205,6 @@ items:
         file: "/home/tamura/ros/indigo/src/rtm-ros-robotics/rtmros_choreonoid/hrpsys_choreonoid/scripts/ros_service_server.py"
         executionOnLoading: true
         backgroundExecution: false
-    - 
-      id: 10
-      name: "box"
-      plugin: Body
-      class: BodyItem
-      data: 
-        modelFile: "/home/tamura/ros/indigo_parent/src/openhrp3/sample/model/box.wrl"
-        currentBaseLink: "WAIST"
-        rootPosition: [ 0, 0.18, -0.1014 ]
-        rootAttitude: [ 
-          4.32978028e-17, -1, 4.32978028e-17, 
-          0.707106781, 6.123234e-17, 0.707106781, 
-          -0.707106781, 0, 0.707106781 ]
-        jointPositions: [  ]
-        initialRootPosition: [ 0, 0.18, -0.1014 ]
-        initialRootAttitude: [ 
-          0, -1, 0, 
-          0.707106781, 0, 0.707106781, 
-          -0.707106781, 0, 0.707106781 ]
-        zmp: [ 0, 0, 0 ]
-        collisionDetection: true
-        selfCollisionDetection: false
-        isEditable: false
 views: 
   - 
     id: 0
@@ -223,7 +223,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 10 ]
+      selected: [ 5 ]
       checked: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
       expanded: [ 1 ]
   - 
@@ -277,7 +277,7 @@ views:
           far: 100
           eye: [ -2.97618764, 0.605615019, 1.88450043 ]
           direction: [ 0.84883985, 0.0745584935, -0.523365971 ]
-          up: [ 0.521358662, 0.0457939344, 0.85210801 ]
+          up: [ 0.521358663, 0.0457939345, 0.85210801 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -316,7 +316,7 @@ views:
       spinBox: true
       slider: true
       labelOnLeft: true
-      currentBodyItem: 10
+      currentBodyItem: 5
   - 
     id: 8
     plugin: Body
@@ -324,7 +324,7 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 10
+      currentBodyItem: 5
   - 
     id: 9
     plugin: OpenRTM
@@ -354,7 +354,7 @@ toolbars:
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
   "BodyBar": 
-    current: 10
+    current: 5
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
@@ -406,7 +406,7 @@ Body:
         showPpcom: false
         showZmp: false
       - 
-        bodyItem: 10
+        bodyItem: 5
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
@@ -429,12 +429,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 476, 2317 ]
+      sizes: [ 435, 2119 ]
       children: 
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 762, 760 ]
+          sizes: [ 672, 670 ]
           children: 
             - 
               type: pane
@@ -447,12 +447,12 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 1522, 0 ]
+          sizes: [ 1342, 0 ]
           children: 
             - 
               type: splitter
               orientation: horizontal
-              sizes: [ 334, 1977 ]
+              sizes: [ 305, 1808 ]
               children: 
                 - 
                   type: pane
